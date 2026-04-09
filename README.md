@@ -39,24 +39,24 @@ Default categories are defined in `src/scoring.js` as `SCORING_CATEGORIES`:
 1. **Declared base weights (`renormalize`)**  
    Among **applicable** categories only, sum their **base weights**. Each applicable category receives:
 
-   \[
-   \text{normalized\_weight}_i = \frac{\text{base\_weight}_i}{\sum \text{base\_weight}_{\text{applicable}}}
-   \]
+   ```
+   normalized_weight[i] = base_weight[i] / sum(base_weight[j] for all applicable j)
+   ```
 
    So remaining weights sum to **100%**. N/A categories are left out of that sum.
 
    If the sum of base weights among applicable categories is **0** (e.g. only “Purpose” remains applicable and its base weight is 0), the demo **falls back** to **equal** weights across applicable categories so a score can still be computed.
 
 2. **Equal split (`equal`)**  
-   Each **applicable** category gets weight \(1 / n\) where \(n\) is the count of applicable categories.
+   Each **applicable** category gets weight `1 / n`, where `n` is the count of applicable categories.
 
 ### Overall score
 
 Scores are on a **0–10** scale per applicable category. The overall result is:
 
-\[
-\text{overall} = \sum_i (\text{normalized\_weight}_i \times \text{score}_i)
-\]
+```
+overall = sum over i of (normalized_weight[i] * score[i])
+```
 
 Only **applicable** categories with a score contribute. If **no** category is applicable, the completion page explains that no overall score is computed.
 
