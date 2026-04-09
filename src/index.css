@@ -1,0 +1,47 @@
+/* You can add your custom css here.*/
+
+.weighted-demo-intro {
+  line-height: 1.5;
+}
+
+.weighted-demo-intro ul {
+  margin: 0.75em 0;
+  padding-left: 1.25em;
+}
+
+.weighted-result {
+  max-width: 52rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.weighted-result__overall {
+  font-size: 1.25rem;
+}
+
+.weighted-result__scale {
+  font-weight: normal;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.weighted-result__mode {
+  margin-bottom: 1rem;
+}
+
+.weighted-result__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.weighted-result__table th,
+.weighted-result__table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+}
+
+.weighted-result__table th {
+  background: #f5f5f5;
+}
