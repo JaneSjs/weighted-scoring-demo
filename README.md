@@ -20,7 +20,7 @@ This demo shows how to create a **weighted category score** with **“not applic
 
 ### Categories and base weights
 
-Default categories are defined in `src/scoring.js` as `SCORING_CATEGORIES`:
+Default categories are defined in [`src/scoring.js`](src/scoring.js) as `SCORING_CATEGORIES`:
 
 | Category | Base weight (declared-weight mode) |
 | -------- | ----------------------------------- |
@@ -77,15 +77,15 @@ Only **applicable** categories with a score contribute. If **no** category is ap
 
 | Path | Purpose |
 | ---- | ------- |
-| `src/index.js` | React entry; mounts the app on `#surveyElement`. |
-| `src/SurveyComponent.jsx` | Creates a **single** `Model` instance with `useMemo`, applies **Sharp Light** theme, wires **completion** handlers. |
-| `src/json.js` | Survey **JSON**: intro HTML, `weightingMode` question, dynamically generated **panels** from `SCORING_CATEGORIES`. |
-| `src/scoring.js` | **Pure functions**: `computeWeightedOutcome`, `formatOutcomeAsHtml`; category config `SCORING_CATEGORIES`. |
-| `src/index.css` | Styles for the intro block and the results table on the completed page. |
-| `public/index.html` | Host page with root `#surveyElement`. |
-| `.github/workflows/deploy-github-pages.yml` | CI: `npm ci` → `npm run build` → deploy `build/` to GitHub Pages. |
+| [`src/index.js`](src/index.js) | React entry; mounts the app on `#surveyElement`. |
+| [`src/SurveyComponent.jsx`](src/SurveyComponent.jsx) | Creates a **single** `Model` instance with `useMemo`, applies **Sharp Light** theme, wires **completion** handlers. |
+| [`src/json.js`](src/json.js) | Survey **JSON**: intro HTML, `weightingMode` question, dynamically generated **panels** from `SCORING_CATEGORIES`. |
+| [`src/scoring.js`](src/scoring.js) | **Pure functions**: `computeWeightedOutcome`, `formatOutcomeAsHtml`; category config `SCORING_CATEGORIES`. |
+| [`src/index.css`](src/index.css) | Styles for the intro block and the results table on the completed page. |
+| [`public/index.html`](public/index.html) | Host page with root `#surveyElement`. |
+| [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) | CI: `npm ci` → `npm run build` → deploy `build/` to GitHub Pages. |
 
-### Survey model (`src/json.js`)
+### Survey model ([`src/json.js`](src/json.js))
 
 - **Page “setup”**  
   - `html` element: explains weighted scoring and N/A behavior.  
@@ -98,7 +98,7 @@ Only **applicable** categories with a score contribute. If **no** category is ap
 
 - **`completedHtml`** in JSON is a placeholder; the real content is set in code (see below).
 
-### React integration (`src/SurveyComponent.jsx`)
+### React integration ([`src/SurveyComponent.jsx`](src/SurveyComponent.jsx))
 
 - **`useMemo(() => new Model(json), [])`**  
   Avoids recreating the `Model` on every render (which would reset state and duplicate event handlers).
@@ -115,7 +115,7 @@ Only **applicable** categories with a score contribute. If **no** category is ap
 - **`onComplete`**  
   Logs final `sender.data` and the computed outcome to the browser console (useful for debugging or piping to analytics).
 
-### Scoring module (`src/scoring.js`)
+### Scoring module ([`src/scoring.js`](src/scoring.js))
 
 - **`computeWeightedOutcome(data, mode, categories?)`**  
   Implements normalization, equal mode, zero–sum base-weight fallback, and the weighted sum. Returns `{ overall, mode, rows, message? }`.
@@ -125,18 +125,18 @@ Only **applicable** categories with a score contribute. If **no** category is ap
 
 - **Extending categories**  
   Add or edit objects in `SCORING_CATEGORIES` (`key`, `title`, `baseWeight`).  
-  `src/json.js` imports the same array to keep the **form** and **math** in sync.
+  [`src/json.js`](src/json.js) imports the same array to keep the **form** and **math** in sync.
 
 ### GitHub Pages
 
-- **`homepage`** in `package.json` is set to `https://janeSjs.github.io/weighted-scoring-demo` so Create React App emits correct **asset paths** for a project site (subpath under `github.io`).
+- **`homepage`** in [`package.json`](package.json) is set to `https://janeSjs.github.io/weighted-scoring-demo` so Create React App emits correct **asset paths** for a project site (subpath under `github.io`).
 
 - **Repository settings:** **Settings → Pages → Build and deployment → Source: GitHub Actions.**
 
 - **Workflow:** On push to **`main`** (or manual **workflow_dispatch**), the workflow runs `npm ci`, `npm run build`, uploads `build/` with `actions/upload-pages-artifact`, and deploys with `actions/deploy-pages`.  
   Actions use **Node 24** (`actions/checkout@v6`, `actions/setup-node@v6`) to align with current GitHub Actions runtime guidance.
 
-If you rename the repository, update **`homepage`** in `package.json` to `https://<user>.github.io/<repo>/` and push again.
+If you rename the repository, update **`homepage`** in [`package.json`](package.json) to `https://<user>.github.io/<repo>/` and push again.
 
 ---
 
